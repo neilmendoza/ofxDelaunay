@@ -44,6 +44,7 @@ public:
 	ITRIANGLE getTriangleAtIndex(int index);
 
 	int  triangulate();
+	int  triangulate(ofMesh& mesh);
 	void draw();
 	
     ofMesh triangleMesh; //output of triangulate();

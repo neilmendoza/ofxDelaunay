@@ -51,8 +51,13 @@ int ofxDelaunay::addPoints( vector<ofPoint>& points ){
     return vertices.size();
 }
 
-int ofxDelaunay::triangulate(){
-    
+int ofxDelaunay::triangulate()
+{
+    triangulate(triangleMesh);
+}
+
+int ofxDelaunay::triangulate(ofMesh& mesh)
+{
     if(vertices.size() < 3){
         return NULL;
     }
@@ -86,19 +91,19 @@ int ofxDelaunay::triangulate(){
 	Triangulate( nv, &verticesXYZ[0], &triangles[0], ntri );
 	
 	//copy triangle data to ofxDelaunayTriangle.
-	triangleMesh.clear();
-	triangleMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+    mesh.clear();
+    mesh.setMode(OF_PRIMITIVE_TRIANGLES);
 	
     //copy vertices
 	for (int i = 0; i < nv; i++){
-        triangleMesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
+        mesh.addVertex(ofVec3f(vertices[i].x,vertices[i].y,vertices[i].z));
     }
 	
 	//copy triangles
 	for(int i = 0; i < ntri; i++){
-		triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p1).i);
-		triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p2).i);
-		triangleMesh.addIndex(verticesTemp.at(triangles[ i ].p3).i);
+        mesh.addIndex(verticesTemp.at(triangles[ i ].p1).i);
+        mesh.addIndex(verticesTemp.at(triangles[ i ].p2).i);
+        mesh.addIndex(verticesTemp.at(triangles[ i ].p3).i);
 	}
 	
 	return ntri;
