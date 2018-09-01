@@ -53,7 +53,7 @@ int ofxDelaunay::addPoints( vector<ofPoint>& points ){
 
 int ofxDelaunay::triangulate()
 {
-    triangulate(triangleMesh);
+    return triangulate(triangleMesh);
 }
 
 int ofxDelaunay::triangulate(ofMesh& mesh)
